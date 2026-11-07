@@ -33,7 +33,7 @@ body {
 
   /* 몬스터 스탯 카드 숫자: 약 1.2배 (카드 배경과 정렬 유지) */
   body.portrait-mode ghs-monster-stats .stats .stat .value {
-    font-size: calc(1.2em * var(--ghs-fontsize)) !important;
+    font-size: calc(1.05em * var(--ghs-fontsize)) !important;
   }
 
   /* 하단 '다음 라운드' 버튼: 한 줄로 표시되도록 폭 확보 */

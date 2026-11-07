@@ -12,10 +12,15 @@ index a593107..b945709 100644
    </head>
  
 diff --git a/src/styles.scss b/src/styles.scss
-index c181f1c..c020b90 100644
+index c181f1c..99efeb0 100644
 --- a/src/styles.scss
 +++ b/src/styles.scss
-@@ -2259,3 +2259,6 @@ kbd {
+@@ -1,3 +1,4 @@
++@import "pretendard";
+ @font-face {
+   font-family: 'pirataone';
+   src: url('assets/fonts/PirataOne-Gloomhaven.eot');
+@@ -2259,3 +2260,6 @@ kbd {
      }
    }
  }

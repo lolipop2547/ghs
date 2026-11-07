@@ -139,3 +139,82 @@ body ghs-footer .round-container * {
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
   background: rgba(5, 6, 8, 0.6);
 }
+
+/* ===== 세련되게: 모던 글꼴 + 장식 외곽선 제거 ===== */
+body,
+body .fh,
+body .modern,
+body .bb,
+body.fh {
+  --ghs-font-title: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif !important;
+  --ghs-font-normal: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif !important;
+  --ghs-font-text: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif !important;
+  --ghs-font-extra: 'Pretendard Variable', 'Pretendard', system-ui, sans-serif !important;
+  --ghs-outline: 0 1px 2px rgba(0, 0, 0, 0.55) !important;
+  --ghs-outline-thin: 0 1px 1px rgba(0, 0, 0, 0.45) !important;
+  --ghs-filter-outline: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45)) !important;
+  --ghs-filter-outline-thin: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4)) !important;
+  --ghs-filter-shadow: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45)) !important;
+  --ghs-filter-shadow-thin: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.4)) !important;
+  font-feature-settings: 'tnum' 1;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+body {
+  font-weight: 500;
+}
+ghs-character ghs-character-initiative input,
+ghs-character ghs-character-initiative .initiative,
+ghs-monster-ability-card .initiative {
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+}
+ghs-character .status-bar .health {
+  font-weight: 600;
+}
+ghs-character .title-bar .title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+/* 스탯 숫자 폭 줄이기 (두 자리 숫자 잘림 방지) */
+ghs-monster-stats .stats .stat .value {
+  letter-spacing: -0.06em;
+  font-weight: 600;
+}
+/* 하단 수치 줄이기 */
+@media (max-width: 600px), (orientation: portrait) {
+  body.portrait-mode ghs-level .values span {
+    font-size: calc(var(--ghs-unit) * 3.1 * var(--ghs-barsize)) !important;
+    font-weight: 600;
+  }
+}
+/* 청동 동전 아이콘 → 은은한 회색 */
+ghs-character .attack-modifier-button img,
+ghs-character .attack-modifier-button {
+  filter: grayscale(1) brightness(1.15) contrast(0.95) !important;
+  opacity: 0.85;
+}
+@media (max-width: 600px), (orientation: portrait) {
+  body.portrait-mode ghs-footer ghs-scenario .scenario-container .button {
+    font-size: calc(var(--ghs-unit) * 3.7 * var(--ghs-barsize)) !important;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+  body.portrait-mode ghs-footer ghs-level .values {
+    gap: 0 !important;
+  }
+  body.portrait-mode ghs-footer ghs-level .values span {
+    margin-left: calc(var(--ghs-unit) * 0.6) !important;
+    margin-right: 0 !important;
+  }
+}
+/* 공격 보정 덱 뒷면: 장식 톤 낮추기 */
+ghs-footer .am-deck .am-container,
+ghs-footer .loot-deck .loot-container {
+  filter: saturate(0.35) brightness(0.85);
+  border-radius: calc(var(--ghs-unit) * 1.5);
+}
+ghs-monster-stats .stats .stat { overflow: hidden !important; }
+ghs-monster-stats .stats .stat.elite { padding-left: 0.7em !important; overflow: visible !important; }
+body.portrait-mode ghs-monster-stats .stats .stat .value { font-size: calc(0.98em * var(--ghs-fontsize)) !important; letter-spacing: -0.07em; }
+
