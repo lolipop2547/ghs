@@ -218,3 +218,47 @@ ghs-monster-stats .stats .stat { overflow: hidden !important; }
 ghs-monster-stats .stats .stat.elite { padding-left: 0.7em !important; overflow: visible !important; }
 body.portrait-mode ghs-monster-stats .stats .stat .value { font-size: calc(0.98em * var(--ghs-fontsize)) !important; letter-spacing: -0.07em; }
 
+
+/* 시작 화면: 양피지용 어두운 글자 → 밝은 글자 */
+ghs-main .welcome,
+ghs-main .welcome.fh {
+  --ghs-color-darkgray: #aab2c0;
+  --ghs-color-black: #eceef2;
+  --ghs-filter-darkgray: invert(78%) sepia(8%) saturate(380%) hue-rotate(182deg) brightness(92%) contrast(88%);
+  --ghs-filter-black: invert(96%) sepia(4%) saturate(200%) hue-rotate(190deg) brightness(102%);
+}
+ghs-main .welcome h2 {
+  margin-top: calc(var(--ghs-unit) * 3) !important;
+  margin-bottom: calc(var(--ghs-unit) * 3) !important;
+  padding: 0 calc(var(--ghs-unit) * 4);
+  color: var(--dk-text) !important;
+  text-shadow: none !important;
+  font-size: calc(var(--ghs-unit) * 5.6) !important;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+ghs-main .welcome .install {
+  margin-top: calc(var(--ghs-unit) * 2);
+  padding: calc(var(--ghs-unit) * 1.5) calc(var(--ghs-unit) * 4);
+  border: 1px solid var(--dk-border);
+  border-radius: 999px;
+  background: var(--dk-surface2);
+  color: var(--dk-text) !important;
+  font-size: calc(var(--ghs-unit) * 3.6) !important;
+  font-weight: 600;
+  gap: calc(var(--ghs-unit) * 1.5);
+}
+ghs-main .welcome p {
+  color: var(--dk-muted) !important;
+  font-size: calc(var(--ghs-unit) * 3.4) !important;
+  line-height: 1.4;
+  padding: 0 calc(var(--ghs-unit) * 3);
+}
+ghs-main .welcome .container-row.bordered {
+  border-color: var(--dk-border) !important;
+}
+ghs-main .welcome .ghs-logo {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5)) !important;
+}
+ghs-main .welcome .loading-cancel { color: var(--dk-muted) !important; }
