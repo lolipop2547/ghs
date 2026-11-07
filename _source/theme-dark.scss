@@ -454,3 +454,93 @@ ghs-main .welcome .loading-bar-container {
 ghs-main .welcome .loading-bar-container .loading-bar {
   background-color: var(--dk-gold) !important;
 }
+
+/* ===== 사용성 개선 ===== */
+/* 1) 폰에서 작은 버튼의 터치 범위 넓히기 (보이는 크기는 그대로) */
+@media (pointer: coarse) {
+  ghs-character .attack-modifier-button::after,
+  ghs-character .summon-dialog-button::after {
+    content: '';
+    position: absolute;
+    inset: -9px -7px;
+  }
+  ghs-character .experience::after,
+  ghs-character .loot::after {
+    content: '';
+    position: absolute;
+    inset: -3px -9px;
+  }
+  ghs-character ghs-character-initiative {
+    position: relative;
+  }
+  ghs-character ghs-character-initiative::after {
+    content: '';
+    position: absolute;
+    inset: 0 -6px;
+    pointer-events: none;
+  }
+  ghs-header ghs-element .element {
+    position: relative;
+  }
+  ghs-header ghs-element .element::after {
+    content: '';
+    position: absolute;
+    inset: -6px -1px;
+  }
+}
+
+/* 2) 메뉴의 실행 취소/다시 실행: 설명을 2줄로 고정해서 버튼 위치가 흔들리지 않게 */
+ghs-main-menu .state-container .state .info,
+.menu-container .state-container .state .info {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.5em;
+  max-height: 2.5em;
+  line-height: 1.25;
+}
+
+/* 3) 다 쓴 일회용 아이템을 확실히 흐리게 + '사용함' 표시 */
+ghs-character-item ghs-item.unavailable {
+  position: relative;
+  filter: grayscale(1) brightness(0.45) !important;
+}
+ghs-character-item:has(ghs-item.unavailable)::after {
+  content: '사용함';
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%) rotate(-12deg);
+  padding: 0.15em 0.6em;
+  border: 2px solid var(--dk-gold);
+  border-radius: 6px;
+  color: var(--dk-gold);
+  background: rgba(18, 16, 20, 0.75);
+  font: 700 calc(var(--ghs-unit) * 3.2) / 1.2 var(--dk-sans);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* 4) 새 버전 알림 */
+.ko-update-banner {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--ghs-unit) * 17);
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: calc(var(--ghs-unit) * 2.4) calc(var(--ghs-unit) * 5);
+  border-radius: 999px;
+  background: var(--dk-gold, #d6b26e);
+  color: #1b1612 !important;
+  font: 600 calc(var(--ghs-unit) * 3.6) / 1.2 var(--dk-sans, sans-serif);
+  white-space: nowrap;
+  box-shadow: 0 calc(var(--ghs-unit) * 1.5) calc(var(--ghs-unit) * 5) rgba(0, 0, 0, 0.55);
+  cursor: pointer;
+  animation: ko-update-in 0.35s ease-out;
+}
+@keyframes ko-update-in {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}

@@ -23,6 +23,7 @@
   },
   "and": "and",
   "app": {
+    "updateReady": "New version available · Tap to update",
     "install": "Install as App",
     "loading": {
       "": "Loading…",

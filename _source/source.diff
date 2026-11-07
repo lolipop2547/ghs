@@ -1,0 +1,80 @@
+diff --git a/src/app/ui/main.html b/src/app/ui/main.html
+index d185923..2f1b43f 100644
+--- a/src/app/ui/main.html
++++ b/src/app/ui/main.html
+@@ -294,4 +294,7 @@
+     <ghs-character-fullview [character]="fullviewChar"></ghs-character-fullview>
+   }
+ </main>
++@if (gameManager.stateManager.hasUpdate) {
++  <a class="ko-update-banner" (click)="applyUpdate()"><span [ghs-label]="'app.updateReady'"></span></a>
++}
+ <ghs-footer #footer></ghs-footer>
+diff --git a/src/app/ui/main.ts b/src/app/ui/main.ts
+index 8540979..672714e 100644
+--- a/src/app/ui/main.ts
++++ b/src/app/ui/main.ts
+@@ -232,6 +232,21 @@ export class MainComponent implements OnInit {
+     });
+   }
+ 
++  applyUpdate() {
++    const reload = async () => {
++      if ('caches' in window) {
++        const keys = await caches.keys();
++        await Promise.all(keys.map((key) => caches.delete(key)));
++      }
++      window.location.reload();
++    };
++    if (this.swUpdate.isEnabled) {
++      this.swUpdate.activateUpdate().then(reload, reload);
++    } else {
++      reload();
++    }
++  }
++
+   onFigureScroll() {
+     this.pointerInputService.cancel();
+   }
+diff --git a/src/assets/locales/en.json b/src/assets/locales/en.json
+index c35da5b..682c18f 100644
+--- a/src/assets/locales/en.json
++++ b/src/assets/locales/en.json
+@@ -23,6 +23,7 @@
+   },
+   "and": "and",
+   "app": {
++    "updateReady": "New version available · Tap to update",
+     "install": "Install as App",
+     "loading": {
+       "": "Loading…",
+diff --git a/src/index.html b/src/index.html
+index a593107..b945709 100644
+--- a/src/index.html
++++ b/src/index.html
+@@ -15,7 +15,7 @@
+     <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+     <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png" />
+     <link rel="manifest" href="manifest.webmanifest" />
+-    <meta name="theme-color" content="#936658" />
++    <meta name="theme-color" content="#0e1014" />
+     <meta name="mobile-web-app-capable" content="yes" />
+   </head>
+ 
+diff --git a/src/styles.scss b/src/styles.scss
+index c181f1c..7efd185 100644
+--- a/src/styles.scss
++++ b/src/styles.scss
+@@ -1,3 +1,4 @@
++@import "fonts-kr";
+ @font-face {
+   font-family: 'pirataone';
+   src: url('assets/fonts/PirataOne-Gloomhaven.eot');
+@@ -2259,3 +2260,7 @@ kbd {
+     }
+   }
+ }
++
++@import "mobile-ko";
++@import "theme-dark";
++@import "ko-version";
