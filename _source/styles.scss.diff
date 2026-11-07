@@ -1,0 +1,10 @@
+diff --git a/src/styles.scss b/src/styles.scss
+index c181f1c..337c787 100644
+--- a/src/styles.scss
++++ b/src/styles.scss
+@@ -2259,3 +2259,5 @@ kbd {
+     }
+   }
+ }
++
++@import "mobile-ko";

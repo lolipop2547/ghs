@@ -1,0 +1,62 @@
+/* ===== 폰 가시성 개선 (한국어 전용 버전) ===== */
+
+/* 한국어 단어 중간에서 줄이 바뀌지 않게 (영어 등에는 영향 없음) */
+body {
+  word-break: keep-all;
+}
+
+@media (max-width: 600px), (orientation: portrait) {
+  /* 상단 안내 문구: 6.8px → 약 10px, 최대 3줄 */
+  body.portrait-mode ghs-header .hints {
+    font-size: calc(var(--ghs-unit) * 2.6 * var(--ghs-barsize)) !important;
+    line-height: 1.15;
+  }
+  body.portrait-mode ghs-header .hints span {
+    margin: 0 calc(var(--ghs-unit) * 1) !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* 파티 기록지 버튼: 8.2px → 약 11px */
+  body.portrait-mode ghs-party-sheet .button {
+    font-size: calc(var(--ghs-unit) * 2.9 * var(--ghs-barsize)) !important;
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  /* 몬스터 능력 카드 행동 문구: 약 1.35배 */
+  body.portrait-mode ghs-ability-card .ability-actions ghs-actions {
+    font-size: calc(1.35em * var(--ghs-fontsize)) !important;
+  }
+
+  /* 몬스터 스탯 카드 숫자: 약 1.2배 (카드 배경과 정렬 유지) */
+  body.portrait-mode ghs-monster-stats .stats .stat .value {
+    font-size: calc(1.2em * var(--ghs-fontsize)) !important;
+  }
+
+  /* 하단 '다음 라운드' 버튼: 한 줄로 표시되도록 폭 확보 */
+  body.portrait-mode ghs-footer .round-container {
+    width: calc(var(--ghs-unit) * 24 * var(--ghs-barsize)) !important;
+  }
+  body.portrait-mode ghs-footer .round-container .placeholder,
+  body.portrait-mode ghs-footer .round-container > a,
+  body.portrait-mode ghs-footer .round-container > span:not(.time) {
+    font-size: calc(var(--ghs-unit) * 3.7 * var(--ghs-barsize)) !important;
+    white-space: nowrap;
+  }
+
+  /* 하단 레벨·함정·금화 수치: 11.7px → 약 14px */
+  body.portrait-mode ghs-level .values span {
+    font-size: calc(var(--ghs-unit) * 3.6 * var(--ghs-barsize)) !important;
+  }
+  body.portrait-mode ghs-level .values span .ghs-svg {
+    width: calc(var(--ghs-unit) * 3.6 * var(--ghs-barsize)) !important;
+  }
+
+  /* 캐릭터 경험치·금화 숫자 */
+  body.portrait-mode ghs-character .stats .column span {
+    font-size: 1.15em;
+  }
+}
