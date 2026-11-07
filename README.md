@@ -6,4 +6,4 @@
 - `ko.json`: 빠져 있던 UI 번역 719개 추가
 - `mobile-ko.scss`: 폰 세로 화면 가독성 개선 (styles.scss 끝에서 import)
 - `theme-dark.scss`: 모던 다크 테마 (styles.scss 끝에서 import)
-- 글꼴: Pretendard (SIL OFL 1.1, `assets/fonts/pretendard/LICENSE.txt`)
+- 글꼴: Noto Serif KR, IBM Plex Sans KR (SIL OFL 1.1, `assets/fonts/*/LICENSE.txt`)
