@@ -45,21 +45,15 @@ index d185923..2f1b43f 100644
 +}
  <ghs-footer #footer></ghs-footer>
 diff --git a/src/app/ui/main.ts b/src/app/ui/main.ts
-index 8540979..672714e 100644
+index 8540979..70a7331 100644
 --- a/src/app/ui/main.ts
 +++ b/src/app/ui/main.ts
-@@ -232,6 +232,21 @@ export class MainComponent implements OnInit {
+@@ -232,6 +232,15 @@ export class MainComponent implements OnInit {
      });
    }
  
 +  applyUpdate() {
-+    const reload = async () => {
-+      if ('caches' in window) {
-+        const keys = await caches.keys();
-+        await Promise.all(keys.map((key) => caches.delete(key)));
-+      }
-+      window.location.reload();
-+    };
++    const reload = () => window.location.reload();
 +    if (this.swUpdate.isEnabled) {
 +      this.swUpdate.activateUpdate().then(reload, reload);
 +    } else {
