@@ -544,3 +544,126 @@ ghs-character-item:has(ghs-item.unavailable)::after {
   from { opacity: 0; transform: translate(-50%, 12px); }
   to { opacity: 1; transform: translate(-50%, 0); }
 }
+
+/* ===== 캐릭터·파티 시트: 흰 종이 → 다크 ===== */
+.character-sheet-dialog,
+.party-sheet-dialog .character-sheet,
+.character-sheet-dialog .character-sheet,
+.party-sheet-dialog {
+  --ghs-color-white: var(--dk-surface);
+  --ghs-color-black: var(--dk-text);
+  --ghs-color-darkgray: var(--dk-muted);
+  --ghs-color-lightgray: var(--dk-surface2);
+  background-color: var(--dk-surface) !important;
+  color: var(--dk-text);
+}
+.party-sheet-dialog .character-sheet .container ,
+.character-sheet-dialog .character-sheet .container {
+  color: var(--dk-text);
+}
+.dialog-invert:has(.character-sheet-dialog, .party-sheet-dialog) .cdk-dialog-container,
+.dialog-invert:has(.character-sheet-dialog, .party-sheet-dialog) .dialog-container {
+  border-image: none !important;
+  border: 1px solid var(--dk-line) !important;
+  border-radius: calc(var(--ghs-unit) * 4) !important;
+  background-image: none !important;
+  background-color: var(--dk-surface) !important;
+}
+/* 검은 아이콘 → 밝게 */
+.party-sheet-dialog img[src*='/action/'],
+.character-sheet-dialog img[src*='/action/'],
+.party-sheet-dialog img[src*='/status/'],
+.character-sheet-dialog img[src*='/status/'],
+.party-sheet-dialog img[src*='level'],
+.character-sheet-dialog img[src*='level'],
+.party-sheet-dialog img[src*='experience'],
+.character-sheet-dialog img[src*='experience'],
+.party-sheet-dialog img[src*='loot'],
+.character-sheet-dialog img[src*='loot'],
+.party-sheet-dialog img[src*='lock'],
+.character-sheet-dialog img[src*='lock'],
+.party-sheet-dialog img[src*='shop'],
+.character-sheet-dialog img[src*='shop'],
+.party-sheet-dialog img[src*='plus'],
+.character-sheet-dialog img[src*='plus'],
+.party-sheet-dialog img[src*='export'],
+.character-sheet-dialog img[src*='export'],
+.party-sheet-dialog img[src*='import'],
+.character-sheet-dialog img[src*='import'],
+.party-sheet-dialog label > img ,
+.character-sheet-dialog label > img {
+  filter: invert(0.92) !important;
+}
+/* 체크박스·칸·구분선: 금색 실선 톤 */
+.party-sheet-dialog .checkbox,
+.character-sheet-dialog .checkbox,
+.party-sheet-dialog input[type='checkbox'] ,
+.character-sheet-dialog input[type='checkbox'] {
+  border-color: rgba(214, 178, 110, 0.6) !important;
+  border-radius: 4px;
+}
+.party-sheet-dialog .compact-separator,
+.character-sheet-dialog .compact-separator,
+.party-sheet-dialog hr ,
+.character-sheet-dialog hr {
+  border: none !important;
+  border-top: 1px solid var(--dk-line-soft) !important;
+}
+.party-sheet-dialog input[type='text'],
+.character-sheet-dialog input[type='text'],
+.party-sheet-dialog input[type='number'],
+.character-sheet-dialog input[type='number'],
+.party-sheet-dialog textarea ,
+.character-sheet-dialog textarea {
+  color: var(--dk-text) !important;
+  background: transparent;
+  border-color: var(--dk-line) !important;
+}
+.party-sheet-dialog label.headline,
+.character-sheet-dialog label.headline,
+.party-sheet-dialog label ,
+.character-sheet-dialog label {
+  color: var(--dk-gold);
+}
+
+.party-sheet-dialog input:not([type='checkbox']),
+.character-sheet-dialog input:not([type='checkbox']) {
+  background-color: rgba(255, 255, 255, 0.04) !important;
+  color: var(--dk-text) !important;
+}
+
+/* ===== 캐릭터 추가 메뉴: 상단 레벨/검색 영역이 목록과 겹치지 않게 ===== */
+.character-add .level-container {
+  background-image: none !important;
+  background-color: var(--dk-surface) !important;
+  border-bottom: 1px solid var(--dk-line-soft);
+  padding-bottom: calc(var(--ghs-unit) * 1.5);
+}
+.character-add .level-container .search {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 2);
+}
+.character-add .level-container .search input[type='text'] {
+  font-size: calc(var(--ghs-unit) * 3.4) !important;
+  height: calc(var(--ghs-unit) * 8);
+  padding: 0 calc(var(--ghs-unit) * 2);
+  border: 1px solid var(--dk-line) !important;
+  border-radius: calc(var(--ghs-unit) * 2);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--dk-text);
+  min-width: 0;
+  flex: 1;
+}
+.character-add .level-container .search label {
+  font-size: calc(var(--ghs-unit) * 3.4) !important;
+  white-space: nowrap;
+}
+.character-add .level-container .level.active {
+  border-color: var(--dk-gold) !important;
+  color: var(--dk-gold);
+}
+.character-add .level-container + .columns .column .line.sticky,
+.character-add .level-container + .columns .column .line:not(sticky):first-child {
+  padding-top: calc(var(--ghs-unit) * 20.5 * var(--ghs-dialog-factor) + var(--ghs-unit) * 9) !important;
+}

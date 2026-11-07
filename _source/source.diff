@@ -1,3 +1,37 @@
+diff --git a/src/app/ui/figures/character/sheet/character-sheet.html b/src/app/ui/figures/character/sheet/character-sheet.html
+index 6d2f65a..a14045a 100644
+--- a/src/app/ui/figures/character/sheet/character-sheet.html
++++ b/src/app/ui/figures/character/sheet/character-sheet.html
+@@ -1,7 +1,7 @@
+ <div
+   class="light character-sheet"
+   [style.--ghs-character-color]="character.color"
+-  [ngClass]="{ 'cs-sheet': csSheet, 'fh-sheet': fhSheet, 'gh2e-sheet': gh2eSheet, compact: settingsManager.settings.characterSheetCompact }"
++  [ngClass]="{ 'cs-sheet': csSheet, 'fh-sheet': fhSheet, 'gh2e-sheet': gh2eSheet, compact: settingsManager.settings.characterSheetCompact || narrowScreen }"
+ >
+   <div
+     class="container"
+@@ -314,7 +314,7 @@
+ 
+     <div class="additional">
+       <hr class="compact-separator" />
+-      @if (!settingsManager.settings.characterSheetCompact || !fhSheet) {
++      @if (!(settingsManager.settings.characterSheetCompact || narrowScreen) || !fhSheet) {
+         <label class="headline"><span [ghs-label]="'character.progress.notes'"></span></label>
+       }
+       <div class="columns">
+diff --git a/src/app/ui/figures/character/sheet/character-sheet.ts b/src/app/ui/figures/character/sheet/character-sheet.ts
+index a585296..06bec03 100644
+--- a/src/app/ui/figures/character/sheet/character-sheet.ts
++++ b/src/app/ui/figures/character/sheet/character-sheet.ts
+@@ -80,6 +80,7 @@ export class CharacterSheetComponent implements OnInit, AfterViewInit {
+   PerkType = PerkType;
+   LootType = LootType;
+   availablePerks: number = 0;
++  narrowScreen: boolean = window.innerWidth < 600;
+   personalQuest: PersonalQuest | undefined;
+   retireEnabled: boolean = false;
+   hasAbilities: boolean = false;
 diff --git a/src/app/ui/main.html b/src/app/ui/main.html
 index d185923..2f1b43f 100644
 --- a/src/app/ui/main.html
