@@ -699,3 +699,10 @@ ghs-main .welcome .edition img {
   word-break: keep-all;
   white-space: normal;
 }
+@media (max-width: 600px), (orientation: portrait) {
+  body.portrait-mode ghs-footer .round-container > a,
+  body.portrait-mode ghs-footer .round-container .placeholder {
+    font-size: calc(var(--ghs-unit) * 3.1 * var(--ghs-barsize)) !important;
+    margin-top: calc(var(--ghs-unit) * -1.2);
+  }
+}
