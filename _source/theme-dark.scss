@@ -412,3 +412,45 @@ ghs-character .summon-dialog-button img.ghs-svg {
 ghs-character .summon-dialog-button {
   filter: none !important;
 }
+
+/* ===== 글자 대비 높이기 (검은 배경 위 회색 글씨) ===== */
+body {
+  --dk-muted: #c3bcc9 !important;
+  --ghs-color-gray: #cfd3da !important;
+  --ghs-filter-gray: invert(92%) sepia(6%) saturate(240%) hue-rotate(185deg) brightness(96%) contrast(90%) !important;
+  --ghs-color-disabled: #8a8590 !important;
+}
+ghs-main .welcome,
+ghs-main .welcome.fh {
+  --ghs-color-darkgray: #ddd7e1 !important;
+}
+ghs-main .welcome .add-characters,
+ghs-main .welcome .add-characters *,
+ghs-main .welcome a.settings,
+ghs-main .welcome .container-row > a,
+ghs-main .welcome .container-row > a * {
+  color: var(--dk-gold) !important;
+}
+ghs-main .welcome .loading-cancel,
+ghs-main .welcome .loading-cancel * {
+  color: var(--dk-muted) !important;
+}
+ghs-main .welcome label,
+ghs-main .welcome .hint-container {
+  color: var(--dk-text) !important;
+}
+ghs-header .hints,
+ghs-header .hints * {
+  color: var(--dk-muted) !important;
+}
+ghs-main .welcome > span {
+  color: var(--dk-muted) !important;
+  font-family: var(--dk-sans) !important;
+  font-size: calc(var(--ghs-unit) * 3.4);
+}
+ghs-main .welcome .loading-bar-container {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+ghs-main .welcome .loading-bar-container .loading-bar {
+  background-color: var(--dk-gold) !important;
+}
