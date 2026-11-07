@@ -298,3 +298,46 @@ ghs-party-sheet .button {
     font-size: calc(var(--ghs-unit) * 3.4 * var(--ghs-barsize)) !important;
   }
 }
+
+/* ===== 색 장식 덜어내기 ===== */
+app-root > .container,
+.fullscreen-backdrop {
+  background-image: none !important;
+}
+/* 캐릭터 카드: 색 번짐 제거, 초상화 테두리만 얇게 */
+ghs-character .character {
+  background-image: none !important;
+  box-shadow: none !important;
+}
+ghs-character ghs-character-image .image-container {
+  outline-width: 1.5px !important;
+  outline-offset: -1.5px !important;
+}
+/* 몬스터 능력 카드: 와인색 → 카드와 같은 먹색, 테두리만 붉은 실선 */
+ghs-monster-ability-card .ability-front::before {
+  background: var(--dk-surface) !important;
+}
+ghs-monster-ability-card .ability-front {
+  border-color: rgba(224, 86, 75, 0.28) !important;
+}
+/* 스탯 카드: 정예 칸 금빛을 옅게 */
+ghs-monster-stats .stats-container::before {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.03)) top / 100% 22% no-repeat,
+    linear-gradient(90deg, var(--dk-surface) 0 50%, #221f22 50% 100%) !important;
+}
+/* 버튼: 그라데이션 → 단색 금색 */
+body ghs-footer .round-container {
+  background: var(--dk-gold) !important;
+  background-clip: padding-box !important;
+}
+/* 아이콘: 청동/세피아 → 무채색 */
+ghs-character .attack-modifier-button img,
+ghs-character .attack-modifier-button {
+  filter: grayscale(1) brightness(1.1) !important;
+  opacity: 0.75;
+}
+ghs-footer .am-deck .am-container,
+ghs-footer .loot-deck .loot-container {
+  filter: grayscale(1) brightness(0.8) !important;
+}
