@@ -667,3 +667,35 @@ ghs-character-item:has(ghs-item.unavailable)::after {
 .character-add .level-container + .columns .column .line:not(sticky):first-child {
   padding-top: calc(var(--ghs-unit) * 20.5 * var(--ghs-dialog-factor) + var(--ghs-unit) * 9) !important;
 }
+
+/* ===== 기본 크기 줄이기 (폰 세로) ===== */
+@media (max-width: 600px) {
+  body.portrait-mode {
+    --ghs-text-factor: 1.18 !important;
+    --ghs-dialog-factor: 1.55 !important;
+  }
+}
+ghs-main .welcome h2 {
+  font-size: calc(var(--ghs-unit) * 4.6) !important;
+  margin-top: calc(var(--ghs-unit) * 2) !important;
+  margin-bottom: calc(var(--ghs-unit) * 2) !important;
+}
+ghs-main .welcome .ghs-logo {
+  max-width: calc(var(--ghs-unit) * 20) !important;
+}
+ghs-main .welcome .install {
+  font-size: calc(var(--ghs-unit) * 3.1) !important;
+  padding: calc(var(--ghs-unit) * 1.2) calc(var(--ghs-unit) * 3.5);
+}
+ghs-main .welcome p {
+  font-size: calc(var(--ghs-unit) * 3) !important;
+}
+ghs-main .welcome .edition img {
+  max-width: calc(var(--ghs-unit) * 52) !important;
+}
+/* 파티 시트 '상점 가격' 머리글 잘림 방지 */
+.party-sheet-dialog .column label {
+  line-height: 1.15;
+  word-break: keep-all;
+  white-space: normal;
+}
