@@ -931,3 +931,241 @@ ghs-main .welcome .edition img {
   height: calc(var(--ghs-unit) * 8) !important;
   padding: calc(var(--ghs-unit) * 2) !important;
 }
+
+/* ===== 캠페인 탭: 폰 전용 배치 ===== */
+.party-sheet-dialog .campaign.m-campaign {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: calc(var(--ghs-unit) * 3);
+  width: min(100%, calc(var(--ghs-unit) * 92)) !important;
+  padding: calc(var(--ghs-unit) * 1) calc(var(--ghs-unit) * 1) calc(var(--ghs-unit) * 3);
+  box-sizing: border-box;
+  font-family: var(--dk-sans);
+  font-size: calc(var(--ghs-unit) * 3.6);
+}
+.party-sheet-dialog .m-campaign .m-tabs { display: flex; align-items: center; gap: calc(var(--ghs-unit) * 1); }
+.party-sheet-dialog .m-campaign .m-tabs .spacer { flex: 1; }
+/* 원래 첫 줄(뒤로/제목/캠페인 모드)은 숨김 */
+.party-sheet-dialog .m-campaign > .row.title:nth-of-type(1) { display: none !important; }
+.party-sheet-dialog .m-campaign .m-tabs ~ .row.title:first-of-type { display: none !important; }
+
+/* 캠페인 모드 스위치 */
+.party-sheet-dialog .m-mode-row { display: flex; }
+.party-sheet-dialog .m-mode {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 2);
+  color: var(--dk-text);
+  font-size: calc(var(--ghs-unit) * 3.5);
+  cursor: pointer;
+}
+.party-sheet-dialog .m-switch {
+  position: relative;
+  width: calc(var(--ghs-unit) * 10);
+  height: calc(var(--ghs-unit) * 5.6);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  transition: background 0.2s;
+}
+.party-sheet-dialog .m-switch::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(var(--ghs-unit) * 0.7);
+  width: calc(var(--ghs-unit) * 4.2);
+  height: calc(var(--ghs-unit) * 4.2);
+  border-radius: 50%;
+  background: var(--dk-text);
+  transform: translateY(-50%);
+  transition: left 0.2s;
+}
+.party-sheet-dialog .m-mode.on .m-switch { background: var(--dk-gold); }
+.party-sheet-dialog .m-mode.on .m-switch::after { left: calc(var(--ghs-unit) * 5.1); background: #1b1612; }
+
+/* 섹션을 카드로 */
+.party-sheet-dialog .m-campaign > .row:not(.title),
+.party-sheet-dialog .m-campaign > .columns {
+  background: var(--dk-surface2);
+  border: 1px solid var(--dk-line-soft);
+  border-radius: calc(var(--ghs-unit) * 3.5);
+  padding: calc(var(--ghs-unit) * 3) !important;
+  margin: 0 !important;
+  width: auto !important;
+  box-sizing: border-box;
+}
+.party-sheet-dialog .m-campaign > .row.title:not(:first-of-type) {
+  display: flex;
+  align-items: center;
+  margin: calc(var(--ghs-unit) * 1) 0 calc(var(--ghs-unit) * -1) !important;
+}
+.party-sheet-dialog .m-campaign label,
+.party-sheet-dialog .m-campaign .headline {
+  font-family: var(--dk-serif);
+  font-weight: 600;
+  color: var(--dk-gold);
+  font-size: calc(var(--ghs-unit) * 3.8) !important;
+}
+.party-sheet-dialog .m-campaign select {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--dk-text) !important;
+  border: 1px solid var(--dk-border) !important;
+  border-radius: calc(var(--ghs-unit) * 2);
+  padding: calc(var(--ghs-unit) * 1) calc(var(--ghs-unit) * 2);
+  font-size: calc(var(--ghs-unit) * 3.2) !important;
+}
+.party-sheet-dialog .m-campaign input {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--dk-text) !important;
+  border: 1px solid var(--dk-border) !important;
+  border-radius: calc(var(--ghs-unit) * 2);
+  padding: calc(var(--ghs-unit) * 1.6) calc(var(--ghs-unit) * 2.2) !important;
+  font-size: calc(var(--ghs-unit) * 3.4) !important;
+  height: auto !important;
+  box-sizing: border-box;
+}
+
+/* 시나리오 목록: 번호 | 이름 | 완료 버튼 */
+.party-sheet-dialog .m-campaign .scenarios .scenario {
+  grid-template-columns: calc(var(--ghs-unit) * 10) 1fr auto !important;
+  width: 100% !important;
+  align-items: center;
+  min-height: calc(var(--ghs-unit) * 11);
+  border-bottom: 1px solid var(--dk-border) !important;
+  font-size: calc(var(--ghs-unit) * 3.6);
+}
+.party-sheet-dialog .m-campaign .scenarios .scenario:last-of-type { border-bottom: none !important; }
+.party-sheet-dialog .m-campaign .scenarios .scenario > span:nth-child(2) { display: none !important; }
+.party-sheet-dialog .m-campaign .scenarios .scenario.header.legend { display: none !important; }
+.party-sheet-dialog .m-campaign .scenarios .scenario > span:first-child {
+  color: var(--dk-muted);
+  font-family: var(--dk-serif);
+  font-weight: 700;
+}
+.party-sheet-dialog .m-campaign .scenarios .scenario .scenario-title {
+  text-align: left !important;
+  justify-content: flex-start !important;
+  font-family: var(--dk-serif);
+  font-weight: 600;
+  color: var(--dk-text);
+}
+.party-sheet-dialog .m-campaign .scenarios .scenario > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.5);
+}
+.party-sheet-dialog .m-campaign .scenarios .add-success,
+.party-sheet-dialog .m-campaign .scenarios .toggle-success {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--ghs-unit) * 8.5) !important;
+  height: calc(var(--ghs-unit) * 8.5) !important;
+  border-radius: 50%;
+  border: 1.5px solid var(--dk-line);
+  box-sizing: border-box;
+}
+.party-sheet-dialog .m-campaign .scenarios .add-success img,
+.party-sheet-dialog .m-campaign .scenarios .toggle-success img {
+  width: 55% !important;
+  height: 55% !important;
+  filter: invert(0.85);
+}
+.party-sheet-dialog .m-campaign .scenarios .toggle-success {
+  background: var(--dk-gold);
+  border-color: var(--dk-gold);
+}
+.party-sheet-dialog .m-campaign .scenarios .toggle-success img { filter: none; }
+.party-sheet-dialog .m-campaign .scenarios .add-success.disabled { opacity: 0.3; }
+/* 해금 줄 */
+.party-sheet-dialog .m-campaign .scenarios .scenario.unlock {
+  display: flex !important;
+  gap: calc(var(--ghs-unit) * 1.5);
+  border-bottom: none !important;
+  padding-top: calc(var(--ghs-unit) * 2);
+}
+.party-sheet-dialog .m-campaign .scenarios .scenario.unlock input { flex: 1; min-width: 0; width: auto !important; }
+.party-sheet-dialog .m-campaign .addScenario {
+  display: inline-flex !important;
+  align-items: center;
+  white-space: nowrap;
+  padding: calc(var(--ghs-unit) * 1.6) calc(var(--ghs-unit) * 3);
+  border-radius: 999px;
+  background: var(--dk-gold);
+  color: #1b1612 !important;
+  font-weight: 600;
+  font-size: calc(var(--ghs-unit) * 3.3);
+}
+.party-sheet-dialog .m-campaign .addScenario img { filter: brightness(0); width: calc(var(--ghs-unit) * 3.4); }
+
+/* 아이템·보물 */
+.party-sheet-dialog .m-campaign .items,
+.party-sheet-dialog .m-campaign .treasures {
+  width: 100% !important;
+}
+.party-sheet-dialog .m-campaign .treasure-add,
+.party-sheet-dialog .m-campaign .item-add,
+.party-sheet-dialog .m-campaign .items > div:not(.item-list) {
+  display: flex !important;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.5);
+  margin-top: calc(var(--ghs-unit) * 1.5);
+}
+.party-sheet-dialog .m-campaign .treasure-add input,
+.party-sheet-dialog .m-campaign .items input { flex: 1; min-width: 0; }
+
+/* 아래 두 칸(플레이어 / 이벤트·전투목표)은 세로로 쌓기 */
+.party-sheet-dialog .m-campaign > .columns {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: calc(var(--ghs-unit) * 2);
+}
+.party-sheet-dialog .m-campaign > .columns > .column { width: 100% !important; }
+.party-sheet-dialog .m-campaign .players .player {
+  display: flex !important;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.5);
+  margin-bottom: calc(var(--ghs-unit) * 1.5);
+}
+.party-sheet-dialog .m-campaign .players .player .index {
+  color: var(--dk-muted);
+  font-family: var(--dk-serif);
+  min-width: calc(var(--ghs-unit) * 7);
+  border: none !important;
+}
+.party-sheet-dialog .m-campaign .players .player input { flex: 1; min-width: 0; }
+.party-sheet-dialog .m-campaign .players .remove img {
+  filter: invert(0.6);
+  width: calc(var(--ghs-unit) * 4);
+}
+.party-sheet-dialog .m-campaign .players .add,
+.party-sheet-dialog .m-campaign .events a,
+.party-sheet-dialog .m-campaign .row a.add {
+  display: inline-flex !important;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.2);
+  padding: calc(var(--ghs-unit) * 1.6) calc(var(--ghs-unit) * 3);
+  border-radius: 999px;
+  border: 1px solid var(--dk-line);
+  color: var(--dk-gold) !important;
+}
+.party-sheet-dialog .m-campaign .players .add img { filter: invert(0.8) sepia(0.6); width: calc(var(--ghs-unit) * 3.4); }
+.party-sheet-dialog .m-campaign > .m-mode-row + .row.title { display: none !important; }
+.party-sheet-dialog .m-campaign > .row:not(.title):not(.scenarios):not(.bottom-sheet):not(:has(label)) { display: none !important; }
+.party-sheet-dialog .m-campaign .players .remove img {
+  filter: grayscale(1) invert(0.75) !important;
+  opacity: 0.6;
+}
+.party-sheet-dialog .m-campaign > .columns a {
+  display: inline-flex !important;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.2);
+  padding: calc(var(--ghs-unit) * 1.6) calc(var(--ghs-unit) * 3);
+  border-radius: 999px;
+  border: 1px solid var(--dk-line);
+  color: var(--dk-gold) !important;
+}
+.party-sheet-dialog .m-campaign > .columns a.remove,
+.party-sheet-dialog .m-campaign > .columns a.available-character {
+  padding: 0;
+  border: none;
+}

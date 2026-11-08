@@ -63,7 +63,7 @@ index a585296..06bec03 100644
    retireEnabled: boolean = false;
    hasAbilities: boolean = false;
 diff --git a/src/app/ui/figures/party/party-sheet-dialog.html b/src/app/ui/figures/party/party-sheet-dialog.html
-index 0a79dab..8bdf760 100644
+index 0a79dab..cc3b2e1 100644
 --- a/src/app/ui/figures/party/party-sheet-dialog.html
 +++ b/src/app/ui/figures/party/party-sheet-dialog.html
 @@ -5,6 +5,124 @@
@@ -199,6 +199,34 @@ index 0a79dab..8bdf760 100644
        }
  
        <!-- FH SHEET -->
+@@ -862,7 +981,26 @@
+ 
+       <!-- CAMPAIGN -->
+       @if (campaign) {
+-        <div class="campaign">
++        <div class="campaign" [ngClass]="{ 'm-campaign': narrowScreen }">
++          @if (narrowScreen) {
++            <div class="m-tabs">
++              <span class="m-tab ignore-denied" (click)="campaign = false"><span [ghs-label]="'party.sheet'"></span></span>
++              <span class="m-tab active"><span [ghs-label]="'party.campaign'"></span></span>
++              <span class="spacer"></span>
++              @if (!disableShortcuts) {
++                <img class="m-icon ignore-denied" (click)="openFlowChart()" src="./assets/images/chart.svg" [ghs-tooltip]="'scenario.chart'" />
++                @if (worldMap) {
++                  <img class="m-icon ignore-denied" (click)="openMap()" src="./assets/images/map.svg" [ghs-tooltip]="'party.campaign.map'" />
++                }
++              }
++            </div>
++            <div class="m-mode-row">
++              <span class="m-mode" [ngClass]="{ on: party.campaignMode }" (click)="toggleCampaignMode()">
++                <span class="m-switch"></span>
++                <span [ghs-label]="'party.campaignMode'"></span>
++              </span>
++            </div>
++          }
+           <div class="row title">
+             <span class="campaign-toggle ignore-denied" (click)="campaign = false">
+               <img src="./assets/images/left.svg" /><span [ghs-label]="'party.sheet'"></span>
 diff --git a/src/app/ui/figures/party/party-sheet-dialog.ts b/src/app/ui/figures/party/party-sheet-dialog.ts
 index dc01966..72f9614 100644
 --- a/src/app/ui/figures/party/party-sheet-dialog.ts
