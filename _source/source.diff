@@ -1,3 +1,33 @@
+diff --git a/ngsw-config.json b/ngsw-config.json
+index 92b9f8d..3c3c52b 100644
+--- a/ngsw-config.json
++++ b/ngsw-config.json
+@@ -20,7 +20,7 @@
+     },
+     {
+       "name": "assets",
+-      "installMode": "prefetch",
++      "installMode": "lazy",
+       "resources": {
+         "files": [
+           "/assets/**",
+@@ -28,7 +28,8 @@
+           "!/assets/artwork/**",
+           "!/assets/data/**"
+         ]
+-      }
++      },
++      "updateMode": "lazy"
+     }
+   ],
+   "dataGroups": [
+@@ -55,4 +56,4 @@
+       }
+     }
+   ]
+-}
+\ No newline at end of file
++}
 diff --git a/src/app/ui/figures/character/sheet/character-sheet.html b/src/app/ui/figures/character/sheet/character-sheet.html
 index 6d2f65a..a14045a 100644
 --- a/src/app/ui/figures/character/sheet/character-sheet.html
@@ -32,6 +62,155 @@ index a585296..06bec03 100644
    personalQuest: PersonalQuest | undefined;
    retireEnabled: boolean = false;
    hasAbilities: boolean = false;
+diff --git a/src/app/ui/figures/party/party-sheet-dialog.html b/src/app/ui/figures/party/party-sheet-dialog.html
+index 0a79dab..8bdf760 100644
+--- a/src/app/ui/figures/party/party-sheet-dialog.html
++++ b/src/app/ui/figures/party/party-sheet-dialog.html
+@@ -5,6 +5,124 @@
+       [ngClass]="{ 'fh-container': !campaign && fhSheet, 'gh2e-container': !campaign && gh2eSheet, 'campaign-container': campaign }"
+     >
+       @if (!campaign && !fhSheet && !gh2eSheet) {
++        @if (narrowScreen) {
++          <div class="m-sheet">
++            <div class="m-tabs">
++              <span class="m-tab active"><span [ghs-label]="'party.sheet'"></span></span>
++              <span class="m-tab ignore-denied" (click)="campaign = true"><span [ghs-label]="'party.campaign'"></span></span>
++              <span class="spacer"></span>
++              @if (!disableShortcuts) {
++                <img class="m-icon ignore-denied" (click)="openFlowChart()" src="./assets/images/chart.svg" [ghs-tooltip]="'scenario.chart'" />
++                @if (worldMap) {
++                  <img class="m-icon ignore-denied" (click)="openMap()" src="./assets/images/map.svg" [ghs-tooltip]="'party.campaign.map'" />
++                }
++              }
++            </div>
++
++            <div class="m-card m-identity">
++              <div class="m-name-row">
++                <input
++                  class="m-name"
++                  type="text"
++                  [value]="party.name"
++                  (change)="setName($event)"
++                  [ghs-label]="'party.name'"
++                  [ghs-label-attribute]="'placeholder'"
++                />
++                @if (!gameManager.game.scenario) {
++                  <img class="m-icon" src="./assets/images/plus.svg" (click)="newParty()" [ghs-label]="'party.new'" [ghs-label-attribute]="'title'" />
++                  @if (gameManager.game.parties.length > 1) {
++                    <img class="m-icon" src="./assets/images/minus.svg" (click)="removeParty()" [ghs-label]="'party.remove'" [ghs-label-attribute]="'title'" />
++                  }
++                }
++              </div>
++              @if (gameManager.game.parties.length > 1 && !gameManager.game.scenario) {
++                <select class="m-select" (change)="selectParty($event)" [ghs-label]="'party.change'" [ghs-label-attribute]="'title'">
++                  @for (p of gameManager.game.parties | trackUUID; track p._trackUUID) {
++                    <option [selected]="p.id === party.id" [disabled]="p.id === party.id" value="{{ p.id }}">
++                      @if (p.name) {
++                        <span>{{ p.name }}</span>
++                      } @else {
++                        <span><span [ghs-label]="'party.campaign'"></span>&nbsp;{{ p.id }}</span>
++                      }
++                    </option>
++                  }
++                </select>
++              }
++              <label class="m-field">
++                <span class="m-label"><span [ghs-label]="'party.location'"></span></span>
++                <input type="text" [value]="party.location" (change)="setLocation($event)" [ghs-label]="'party.location'" [ghs-label-attribute]="'placeholder'" />
++              </label>
++            </div>
++
++            <div class="m-card m-reputation">
++              <div class="m-card-head">
++                <span class="m-label"><span [ghs-label]="'party.reputation'"></span></span>
++                <span class="spacer"></span>
++                <span class="m-chip" [ngClass]="{ good: priceModifier < 0, bad: priceModifier > 0 }">
++                  <span [ghs-label]="'party.shop'"></span>&nbsp;
++                  @if (priceModifier !== 0) {
++                    <b>{{ priceModifier | ghsValueSign }}</b>
++                  } @else {
++                    <b><span [ghs-label]="'party.shop.none'"></span></b>
++                  }
++                </span>
++              </div>
++              <div class="m-stepper">
++                <button class="m-step" (click)="setReputation(party.reputation - 1)" [disabled]="party.reputation <= -20">−</button>
++                <span class="m-value">{{ party.reputation | ghsValueSign }}</span>
++                <button class="m-step" (click)="setReputation(party.reputation + 1)" [disabled]="party.reputation >= 20">+</button>
++              </div>
++              <input
++                class="m-range"
++                type="range"
++                min="-20"
++                max="20"
++                step="1"
++                [value]="party.reputation"
++                (change)="setReputation(+$any($event.target).value)"
++              />
++              <div class="m-range-labels"><span>-20</span><span>0</span><span>+20</span></div>
++            </div>
++
++            <div class="m-card m-achievements">
++              <div class="m-card-head">
++                <span class="m-label"><span [ghs-label]="'party.achievements'"></span></span>
++              </div>
++              <div class="m-chips">
++                @for (achievement of partyAchievementsList; track achievement) {
++                  <span class="m-achievement">
++                    @if (achievement.split(':').length > 0 && achievement.split(':')[1] !== '1') {
++                      <span>{{ achievement.split(':')[1] }}×&nbsp;</span>
++                    }
++                    <span [ghs-label]="'data.partyAchievements.' + achievement.split(':')[0]"></span>
++                    <img class="m-remove" src="./assets/images/close.svg" (click)="removeAchievement(achievement)" />
++                  </span>
++                }
++              </div>
++              <div class="m-add">
++                <input
++                  type="text"
++                  #mPartyAchievementInput
++                  [autocomplete]="partyAchievements"
++                  [spoiler]="true"
++                  [emptyLabel]="'party.addPartyAchievement.empty'"
++                  [ghs-label]="'party.addPartyAchievement'"
++                  [ghs-label-attribute]="'placeholder'"
++                  (keyup.enter)="addAchievement(mPartyAchievementInput)"
++                />
++                <button class="m-add-btn" (click)="addAchievement(mPartyAchievementInput)">+</button>
++              </div>
++            </div>
++
++            <div class="m-card m-notes">
++              <div class="m-card-head">
++                <span class="m-label"><span [ghs-label]="'party.notes'"></span></span>
++              </div>
++              <textarea rows="4" [value]="party.notes" (change)="setNotes($event)" [ghs-label]="'party.notes'" [ghs-label-attribute]="'placeholder'"></textarea>
++            </div>
++          </div>
++        } @else {
+         <div class="sheet" [ngClass]="{ 'fh-sheet': fhSheet }">
+           <div class="columns">
+             <div class="column column-left">
+@@ -167,6 +285,7 @@
+             </div>
+           </div>
+         </div>
++        }
+       }
+ 
+       <!-- FH SHEET -->
+diff --git a/src/app/ui/figures/party/party-sheet-dialog.ts b/src/app/ui/figures/party/party-sheet-dialog.ts
+index dc01966..72f9614 100644
+--- a/src/app/ui/figures/party/party-sheet-dialog.ts
++++ b/src/app/ui/figures/party/party-sheet-dialog.ts
+@@ -100,6 +100,7 @@ export class PartySheetDialogComponent implements OnInit {
+   priceModifier: number = 0;
+   moraleDefense: number = 0;
+   campaign: boolean = false;
++  narrowScreen: boolean = window.innerWidth < 600;
+ 
+   partyEdition: string = '';
+   scenarioEditions: string[] = [];
 diff --git a/src/app/ui/main.html b/src/app/ui/main.html
 index d185923..2f1b43f 100644
 --- a/src/app/ui/main.html

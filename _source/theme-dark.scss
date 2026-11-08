@@ -720,3 +720,214 @@ ghs-main .welcome .edition img {
 .character-sheet-dialog .perks .perk {
   align-items: center;
 }
+
+/* ===== 파티 기록지: 폰 전용 배치 ===== */
+.party-sheet-dialog .m-sheet {
+  --m-gap: calc(var(--ghs-unit) * 3);
+  --m-fs: calc(var(--ghs-unit) * 3.8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--m-gap);
+  padding: calc(var(--ghs-unit) * 1) calc(var(--ghs-unit) * 1) calc(var(--ghs-unit) * 3);
+  width: min(100%, calc(var(--ghs-unit) * 92));
+  box-sizing: border-box;
+  font-family: var(--dk-sans);
+  font-size: var(--m-fs);
+  color: var(--dk-text);
+}
+.party-sheet-dialog .m-sheet .spacer { flex: 1; }
+.party-sheet-dialog .m-tabs {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1);
+}
+.party-sheet-dialog .m-tab {
+  padding: calc(var(--ghs-unit) * 1.6) calc(var(--ghs-unit) * 3.4);
+  border-radius: 999px;
+  border: 1px solid var(--dk-line-soft);
+  color: var(--dk-muted);
+  font-size: calc(var(--ghs-unit) * 3.6);
+  cursor: pointer;
+}
+.party-sheet-dialog .m-tab.active {
+  background: var(--dk-gold);
+  border-color: var(--dk-gold);
+  color: #1b1612;
+  font-weight: 600;
+}
+.party-sheet-dialog .m-icon {
+  width: calc(var(--ghs-unit) * 6.5);
+  height: calc(var(--ghs-unit) * 6.5);
+  padding: calc(var(--ghs-unit) * 1.6);
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1px solid var(--dk-line-soft);
+  filter: invert(0.9);
+  cursor: pointer;
+}
+.party-sheet-dialog .m-card {
+  background: var(--dk-surface2);
+  border: 1px solid var(--dk-line-soft);
+  border-radius: calc(var(--ghs-unit) * 3.5);
+  padding: calc(var(--ghs-unit) * 3.2);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ghs-unit) * 2.4);
+}
+.party-sheet-dialog .m-card-head {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 2);
+}
+.party-sheet-dialog .m-label {
+  color: var(--dk-gold);
+  font-family: var(--dk-serif);
+  font-weight: 600;
+  font-size: calc(var(--ghs-unit) * 3.7);
+}
+.party-sheet-dialog .m-name-row {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.5);
+}
+.party-sheet-dialog .m-sheet input[type='text'],
+.party-sheet-dialog .m-sheet textarea,
+.party-sheet-dialog .m-sheet select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  font: inherit;
+  color: var(--dk-text) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid var(--dk-border) !important;
+  border-radius: calc(var(--ghs-unit) * 2.2);
+  padding: calc(var(--ghs-unit) * 2) calc(var(--ghs-unit) * 2.6);
+  outline: none;
+}
+.party-sheet-dialog .m-sheet input[type='text']:focus,
+.party-sheet-dialog .m-sheet textarea:focus {
+  border-color: var(--dk-gold) !important;
+}
+.party-sheet-dialog .m-sheet input.m-name {
+  flex: 1;
+  font-family: var(--dk-serif);
+  font-weight: 700;
+  font-size: calc(var(--ghs-unit) * 5.2);
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--dk-line) !important;
+  border-radius: 0;
+  padding: calc(var(--ghs-unit) * 1) 0;
+}
+.party-sheet-dialog .m-field {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ghs-unit) * 1.2);
+}
+.party-sheet-dialog .m-chip {
+  font-size: calc(var(--ghs-unit) * 3.2);
+  color: var(--dk-muted);
+  padding: calc(var(--ghs-unit) * 0.8) calc(var(--ghs-unit) * 2.4);
+  border-radius: 999px;
+  border: 1px solid var(--dk-border);
+  white-space: nowrap;
+}
+.party-sheet-dialog .m-chip b { color: var(--dk-text); font-weight: 700; }
+.party-sheet-dialog .m-chip.good b { color: #7dd88a; }
+.party-sheet-dialog .m-chip.bad b { color: #f07a6a; }
+.party-sheet-dialog .m-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(var(--ghs-unit) * 6);
+}
+.party-sheet-dialog .m-step {
+  width: calc(var(--ghs-unit) * 12);
+  height: calc(var(--ghs-unit) * 12);
+  border-radius: 50%;
+  border: 1px solid var(--dk-line);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--dk-gold);
+  font: 500 calc(var(--ghs-unit) * 6.5) / 1 var(--dk-sans);
+  cursor: pointer;
+}
+.party-sheet-dialog .m-step:disabled { opacity: 0.3; }
+.party-sheet-dialog .m-value {
+  min-width: calc(var(--ghs-unit) * 16);
+  text-align: center;
+  font: 700 calc(var(--ghs-unit) * 11) / 1 var(--dk-serif);
+  color: var(--dk-gold);
+  letter-spacing: -0.04em;
+}
+.party-sheet-dialog .m-range {
+  width: 100%;
+  accent-color: var(--dk-gold);
+  height: calc(var(--ghs-unit) * 6);
+  margin: 0;
+}
+.party-sheet-dialog .m-range-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: calc(var(--ghs-unit) * -1.5);
+  font-size: calc(var(--ghs-unit) * 2.8);
+  color: var(--dk-muted);
+}
+.party-sheet-dialog .m-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--ghs-unit) * 1.5);
+}
+.party-sheet-dialog .m-chips:empty { display: none; }
+.party-sheet-dialog .m-achievement {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ghs-unit) * 1.2);
+  padding: calc(var(--ghs-unit) * 1.2) calc(var(--ghs-unit) * 1.6) calc(var(--ghs-unit) * 1.2) calc(var(--ghs-unit) * 3);
+  border-radius: 999px;
+  background: rgba(214, 178, 110, 0.12);
+  border: 1px solid var(--dk-line);
+  font-size: calc(var(--ghs-unit) * 3.4);
+}
+.party-sheet-dialog .m-remove {
+  width: calc(var(--ghs-unit) * 4);
+  height: calc(var(--ghs-unit) * 4);
+  filter: invert(0.8);
+  cursor: pointer;
+}
+.party-sheet-dialog .m-add {
+  display: flex;
+  gap: calc(var(--ghs-unit) * 1.5);
+}
+.party-sheet-dialog .m-add-btn {
+  flex: none;
+  width: calc(var(--ghs-unit) * 10);
+  border-radius: calc(var(--ghs-unit) * 2.2);
+  border: none;
+  background: var(--dk-gold);
+  color: #1b1612;
+  font: 600 calc(var(--ghs-unit) * 5.5) / 1 var(--dk-sans);
+  cursor: pointer;
+}
+.party-sheet-dialog .m-notes textarea {
+  resize: vertical;
+  min-height: calc(var(--ghs-unit) * 20);
+  line-height: 1.5;
+}
+.party-sheet-dialog .m-sheet .m-name-row input.m-name {
+  font-size: calc(var(--ghs-unit) * 5.2) !important;
+  height: auto !important;
+}
+.party-sheet-dialog .m-sheet .m-name-row input.m-name::placeholder {
+  color: var(--dk-muted);
+  font-weight: 600;
+}
+.party-sheet-dialog .m-sheet input,
+.party-sheet-dialog .m-sheet textarea {
+  font-size: calc(var(--ghs-unit) * 3.6) !important;
+  height: auto !important;
+}
+.party-sheet-dialog .m-sheet img.m-icon {
+  width: calc(var(--ghs-unit) * 8) !important;
+  height: calc(var(--ghs-unit) * 8) !important;
+  padding: calc(var(--ghs-unit) * 2) !important;
+}
