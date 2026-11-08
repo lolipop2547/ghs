@@ -1300,3 +1300,18 @@ body ghs-footer .round-container .time {
   left: auto !important;
   bottom: auto !important;
 }
+
+/* 캐릭터 능력 카드 목록: 명조, 글씨 작게, 행간 넓게 */
+body.portrait-mode .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions,
+body .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions {
+  font-size: calc(0.92em * var(--ghs-fontsize)) !important;
+}
+.ability-cards-dialog ghs-ability-card .ability-actions,
+.ability-cards-dialog ghs-ability-card .ability-actions span,
+.ability-cards-dialog ghs-ability-card .ability-actions div {
+  font-family: var(--dk-serif) !important;
+}
+.ability-cards-dialog ghs-ability-card ghs-action span.action,
+.ability-cards-dialog ghs-ability-card ghs-action span.action span {
+  line-height: 1.38 !important;
+}
