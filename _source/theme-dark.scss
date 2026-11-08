@@ -1169,3 +1169,20 @@ ghs-main .welcome .edition img {
   padding: 0;
   border: none;
 }
+
+/* 설정 메뉴: 글씨·체크박스 크기 줄이기 */
+@media (max-width: 600px) {
+  ghs-settings-menu .settings-layout {
+    zoom: 0.8;
+  }
+}
+ghs-settings-menu .filter-line input {
+  background: rgba(255, 255, 255, 0.04) !important;
+  color: var(--dk-text) !important;
+  border: 1px solid var(--dk-line) !important;
+  border-radius: calc(var(--ghs-unit) * 2);
+}
+ghs-settings-menu .filter-line input::placeholder {
+  color: var(--dk-muted) !important;
+  opacity: 1;
+}
