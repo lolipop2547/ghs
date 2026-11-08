@@ -1186,3 +1186,11 @@ ghs-settings-menu .filter-line input::placeholder {
   color: var(--dk-muted) !important;
   opacity: 1;
 }
+
+/* 하단 금색 버튼 글자: 명조로 통일 */
+body ghs-footer .round-container > a,
+body ghs-footer .round-container .placeholder {
+  font-family: var(--dk-serif) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+}
