@@ -1194,3 +1194,109 @@ body ghs-footer .round-container .placeholder {
   font-weight: 700 !important;
   letter-spacing: -0.03em;
 }
+
+/* ===== 하단 라운드 버튼 재구성: [라운드 숫자 배지] [다음 라운드 / 시간] ===== */
+body ghs-footer .round-container {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: 'round label' 'round time';
+  align-items: center;
+  align-content: center;
+  column-gap: calc(var(--ghs-unit) * 1.8);
+  row-gap: 0;
+  padding: 0 calc(var(--ghs-unit) * 3) 0 calc(var(--ghs-unit) * 1.4) !important;
+  width: auto !important;
+  min-width: calc(var(--ghs-unit) * 26);
+}
+body ghs-footer .round-container > a {
+  grid-area: label;
+  align-self: end;
+  justify-self: start;
+  margin: 0 !important;
+  font-size: calc(var(--ghs-unit) * 3.5) !important;
+  line-height: 1.15;
+}
+body ghs-footer .round-container:not(:has(.time)) > a {
+  grid-row: 1 / span 2;
+  align-self: center;
+}
+body ghs-footer .round-container .time {
+  grid-area: time;
+  position: static !important;
+  align-self: start;
+  justify-self: start;
+  font-family: var(--dk-sans) !important;
+  font-size: calc(var(--ghs-unit) * 2.5) !important;
+  font-weight: 500;
+  opacity: 0.7;
+  line-height: 1.2;
+}
+body ghs-footer .round-container .round {
+  grid-area: round;
+  position: static !important;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--ghs-unit) * 9.5);
+  height: calc(var(--ghs-unit) * 9.5);
+  border-radius: 50%;
+  background: rgba(27, 22, 18, 0.88);
+  color: var(--dk-gold) !important;
+  font: 700 calc(var(--ghs-unit) * 4.4) / 1 var(--dk-serif) !important;
+  letter-spacing: -0.03em;
+}
+body ghs-footer .round-container .round,
+body ghs-footer .round-container .round * {
+  color: var(--dk-gold) !important;
+}
+body ghs-footer .round-container .round::before {
+  content: '라운드';
+  font: 500 calc(var(--ghs-unit) * 1.9) / 1 var(--dk-sans);
+  color: rgba(214, 178, 110, 0.75);
+  margin-bottom: calc(var(--ghs-unit) * 0.4);
+}
+body ghs-footer .round-container .round .total-rounds {
+  display: none;
+}
+body ghs-footer .round-container .round:not(:has(span)) {
+  display: none !important;
+}
+body ghs-footer .round-container:has(.round:not(:has(span))) {
+  grid-template-columns: 1fr;
+  grid-template-areas: 'label' 'time';
+  justify-items: center;
+  padding: 0 calc(var(--ghs-unit) * 5) !important;
+}
+body ghs-footer .round-container:has(.round:not(:has(span))) > a {
+  justify-self: center;
+  font-size: calc(var(--ghs-unit) * 4) !important;
+}
+@media (max-width: 600px), (orientation: portrait) {
+  body.portrait-mode ghs-footer .round-container {
+    width: calc(var(--ghs-unit) * 31 * var(--ghs-barsize)) !important;
+  }
+  body.portrait-mode ghs-footer .round-container > a {
+    font-size: calc(var(--ghs-unit) * 3.4 * var(--ghs-barsize)) !important;
+    margin-top: 0 !important;
+    white-space: nowrap;
+  }
+}
+body ghs-footer .round-container .round {
+  width: calc(var(--ghs-unit) * 8.6) !important;
+  height: calc(var(--ghs-unit) * 8.6) !important;
+}
+body ghs-footer .round-container > a {
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+}
+body ghs-footer .round-container > span:empty:not(.round):not(.time) {
+  display: none !important;
+}
+body ghs-footer .round-container .time {
+  transform: none !important;
+  left: auto !important;
+  bottom: auto !important;
+}
