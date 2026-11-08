@@ -1302,10 +1302,7 @@ body ghs-footer .round-container .time {
 }
 
 /* 캐릭터 능력 카드 목록: 명조, 글씨 작게, 행간 넓게 */
-body.portrait-mode .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions,
-body .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions {
-  font-size: calc(0.92em * var(--ghs-fontsize)) !important;
-}
+
 .ability-cards-dialog ghs-ability-card .ability-actions,
 .ability-cards-dialog ghs-ability-card .ability-actions span,
 .ability-cards-dialog ghs-ability-card .ability-actions div {
@@ -1314,4 +1311,119 @@ body .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions {
 .ability-cards-dialog ghs-ability-card ghs-action span.action,
 .ability-cards-dialog ghs-ability-card ghs-action span.action span {
   line-height: 1.38 !important;
+}
+
+/* ===== 글씨 크기 4단계 (폰 세로): 대 / 중 / 소 / 극소 ===== */
+body.portrait-mode {
+  --fs-l: calc(var(--ghs-unit) * 4);     /* 대: 이름·체력·주도권·제목·메뉴 항목 */
+  --fs-m: calc(var(--ghs-unit) * 3.4);   /* 중: 본문·라벨·입력값·버튼 */
+  --fs-s: calc(var(--ghs-unit) * 2.9);   /* 소: 보조 정보·수치 칩·힌트 */
+  --fs-xs: calc(var(--ghs-unit) * 2.5);  /* 극소: 카드 번호·시간·버전 */
+}
+
+/* ---------- 대화상자·메뉴: 기본은 '중' ---------- */
+body.portrait-mode .cdk-overlay-container :is(span, label, a, p, li, td, th, h1, h2, h3, h4, input, textarea, select, button, div):not(:is(ghs-ability-card, ghs-monster-ability-card, ghs-attackmodifier, ghs-attackmodifier-deck, ghs-loot, ghs-loot-deck, ghs-standee, ghs-perk-label, ghs-character-image, ghs-event-card, ghs-battlegoal, ghs-item, .attack-modifier-container) *) {
+  font-size: var(--fs-m) !important;
+}
+body.portrait-mode .cdk-overlay-container ghs-perk-label {
+  font-size: var(--fs-m) !important;
+}
+
+/* 대: 제목, 메뉴 항목 */
+body.portrait-mode .cdk-overlay-container :is(
+  .character-title, .character-title *,
+  .menu-container > .line > a, .menu-container > .line > a > span, .menu-container > .line > a > span > span,
+  .menu-container > .line > label, .menu-container > .line > label > span,
+  .state-container a.state > span:not(.info), .state-container a.state > span:not(.info) span,
+  .m-sheet .m-name, .m-sheet .m-name *,
+  .ability-cards-dialog .menu .levels, .ability-cards-dialog .menu .levels *,
+  .headline, .headline > span, .headline > span > span,
+  .title .headline *, .scenario .index
+) {
+  font-size: var(--fs-l) !important;
+}
+
+/* 소: 보조 정보 */
+body.portrait-mode .cdk-overlay-container :is(
+  .info, .info *,
+  .xp-item,
+  .ability-cards-dialog .menu > a, .ability-cards-dialog .menu > a *,
+  ghs-tooltip-component, ghs-tooltip-component *,
+  .m-chip, .m-chip *,
+  .bottom-sheet, .bottom-sheet *,
+  .description, .description *, .hint, .hint *,
+  small
+) {
+  font-size: var(--fs-s) !important;
+}
+
+/* ---------- 메인 화면 ---------- */
+/* 대 */
+body.portrait-mode ghs-character .title-bar .name,
+body.portrait-mode ghs-character .status-bar .health > span,
+body.portrait-mode ghs-character ghs-character-initiative input,
+body.portrait-mode ghs-character ghs-character-initiative .initiative,
+body.portrait-mode ghs-monster-ability-card .ability-front > .initiative {
+  font-size: var(--fs-l) !important;
+}
+/* 중 */
+body.portrait-mode ghs-monster-ability-card .ability-actions ghs-actions,
+body.portrait-mode ghs-footer .round-container > a > span,
+body.portrait-mode ghs-footer .scenario .index,
+body.portrait-mode ghs-footer .scenario .name,
+body.portrait-mode ghs-footer .scenario .name *,
+body.portrait-mode ghs-standee .standee .health > span,
+body.portrait-mode ghs-standee .standee .number .value {
+  font-size: var(--fs-m) !important;
+}
+/* 소 */
+body.portrait-mode ghs-header .hints span,
+body.portrait-mode ghs-party-sheet .button > span,
+body.portrait-mode ghs-character .stats .column > span.experience,
+body.portrait-mode ghs-character .stats .column > span.loot,
+body.portrait-mode ghs-monster-stats .name-container .name,
+body.portrait-mode ghs-monster-stats .name-container .name *,
+body.portrait-mode ghs-monster-stats .stats .stat .value,
+body.portrait-mode ghs-monster-stats .level,
+body.portrait-mode ghs-monster-ability-card .ability-front > .name,
+body.portrait-mode ghs-level .values span,
+body.portrait-mode ghs-footer .am-deck .number span,
+body.portrait-mode ghs-footer .loot-deck .number span {
+  font-size: var(--fs-s) !important;
+}
+/* 극소 */
+body.portrait-mode ghs-monster-ability-card .ability-front > .index,
+body.portrait-mode ghs-monster-ability-card .ability-front > .index *,
+body.portrait-mode ghs-monster-ability-card .left-abilities,
+body.portrait-mode ghs-monster-ability-card .ability-back .name,
+body.portrait-mode ghs-monster-ability-card .ability-back .name *,
+body.portrait-mode ghs-footer .round-container .time,
+body.portrait-mode ghs-footer .round-container .round::before {
+  font-size: var(--fs-xs) !important;
+}
+body.portrait-mode::after {
+  font-size: var(--fs-xs) !important;
+}
+
+/* 캐릭터 능력 카드(카드 그림 안 글씨): 카드 크기에 맞춰 비례, 한 단계 더 작게 */
+body.portrait-mode .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions,
+body .ability-cards-dialog ghs-ability-card .ability-actions ghs-actions {
+  font-size: calc(0.84em * var(--ghs-fontsize)) !important;
+}
+
+/* 설정 메뉴는 이제 단계 크기를 쓰므로 축소 해제 */
+@media (max-width: 600px) {
+  body.portrait-mode ghs-settings-menu .settings-layout { zoom: 1; }
+}
+
+/* 하단바: 기존 규칙보다 우선 */
+html body.portrait-mode ghs-footer footer .round-container > a > span.placeholder, html body.portrait-mode ghs-footer footer .round-container > a > span { font-size: var(--fs-m) !important; }
+html body.portrait-mode ghs-footer footer .round-container .round > span { font-size: var(--fs-l) !important; }
+html body.portrait-mode ghs-footer footer ghs-level .level-status .values span { font-size: var(--fs-s) !important; }
+body.portrait-mode .cdk-overlay-container .menu-container .state-container a.state > span.info,
+body.portrait-mode .cdk-overlay-container .menu-container .state-container a.state > span.info * {
+  font-size: var(--fs-s) !important;
+}
+@media (max-width: 600px), (orientation: portrait) {
+  html body.portrait-mode ghs-footer .round-container { width: calc(var(--ghs-unit) * 34 * var(--ghs-barsize)) !important; }
 }
